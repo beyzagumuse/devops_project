@@ -1,0 +1,12 @@
+[Unit]
+Description=Simple Python HTTP Server
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/python3 /app/script.py
+Restart=always
+User=root
+WorkingDirectory=/app
+
+[Install]
+WantedBy=multi-user.target

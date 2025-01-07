@@ -1,0 +1,24 @@
+services:
+  app:
+    image: python-systemd-app
+    ports:
+      - "8082:8080"  # Dışarıya 8082 portunu açıyoruz, içeriye 8080
+    deploy:
+      replicas: 1  # Yüksek erişilebilirlik için 2 replika.
+    networks:
+      - app-network
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"  # 80 portunu dışarıya açıyoruz (HTTP).
+    volumes:
+      - /Users/ebg/Desktop/Projects/devops_project/nginx.conf:/etc/nginx/nginx.conf  # NGINX konfigürasyon dosyasını bağla.
+    depends_on:
+      - app
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
