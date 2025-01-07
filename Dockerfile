@@ -11,7 +11,7 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /app
 
 # Uygulama kodunu kopyala
-COPY script.py /app/script.py
+COPY script.py .
 
 # Systemd servisi için birim dosyasını kopyala
 COPY myapp.service /etc/systemd/system/myapp.service
@@ -19,5 +19,4 @@ COPY myapp.service /etc/systemd/system/myapp.service
 # Systemd servisini etkinleştir
 RUN systemctl enable myapp.service
 
-# Giriş noktasını systemd olarak ayarla
-CMD ["/lib/systemd/systemd"]
+CMD ["python3", "script.py"]

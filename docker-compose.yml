@@ -1,21 +1,36 @@
+version: '3.8'
+
 services:
   app:
     image: python-systemd-app
+    container_name: myapp
     ports:
-      - "8082:8080"  # Dışarıya 8082 portunu açıyoruz, içeriye 8080
+      - "8080:8080"  # İlk replika için 8080 portu
     deploy:
-      replicas: 1  # Yüksek erişilebilirlik için 2 replika.
+      replicas: 1  # İlk replika burada kalacak
+    networks:
+      - app-network
+
+  app_replica:
+    image: python-systemd-app
+    container_name: myapp-replica
+    ports:
+      - "8081:8080"  # İkinci replika için 8081 portu
+    deploy:
+      replicas: 1
     networks:
       - app-network
 
   nginx:
     image: nginx:alpine
+    container_name: nginx-proxy
     ports:
-      - "80:80"  # 80 portunu dışarıya açıyoruz (HTTP).
+      - "80:80"  # NGINX dışa açık 80 portu
     volumes:
-      - /Users/ebg/Desktop/Projects/devops_project/nginx.conf:/etc/nginx/nginx.conf  # NGINX konfigürasyon dosyasını bağla.
+      - ./nginx.conf:/etc/nginx/nginx.conf
     depends_on:
       - app
+      - app_replica
     networks:
       - app-network
 

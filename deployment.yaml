@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: python-app
+  labels:
+    app: python-app
+spec:
+  replicas: 2  # Yüksek erişilebilirlik için 2 replika
+  selector:
+    matchLabels:
+      app: python-app
+  template:
+    metadata:
+      labels:
+        app: python-app
+    spec:
+      containers:
+      - name: python-app
+        image: eminebeyzagumus/python-systemd-app:latest  # Docker image'inizi burada kullanın
+        ports:
+        - containerPort: 8080
