@@ -9,4 +9,5 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: 8080
-  type: LoadBalancer  # Cluster dışından erişim için LoadBalancer
+      nodePort: 30007
+  type: NodePort

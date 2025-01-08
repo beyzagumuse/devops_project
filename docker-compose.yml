@@ -5,9 +5,9 @@ services:
     image: python-systemd-app
     container_name: myapp
     ports:
-      - "8080:8080"  # İlk replika için 8080 portu
+      - "8080:8080"  
     deploy:
-      replicas: 1  # İlk replika burada kalacak
+      replicas: 1  
     networks:
       - app-network
 
@@ -15,7 +15,7 @@ services:
     image: python-systemd-app
     container_name: myapp-replica
     ports:
-      - "8081:8080"  # İkinci replika için 8081 portu
+      - "8081:8080"  
     deploy:
       replicas: 1
     networks:
@@ -25,7 +25,7 @@ services:
     image: nginx:alpine
     container_name: nginx-proxy
     ports:
-      - "80:80"  # NGINX dışa açık 80 portu
+      - "80:80"  
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf
     depends_on:

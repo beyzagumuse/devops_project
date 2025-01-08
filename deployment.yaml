@@ -5,7 +5,7 @@ metadata:
   labels:
     app: python-app
 spec:
-  replicas: 2  # Yüksek erişilebilirlik için 2 replika
+  replicas: 2  
   selector:
     matchLabels:
       app: python-app
@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: python-app
-        image: eminebeyzagumus/python-systemd-app:latest  # Docker image'inizi burada kullanın
+        image: eminebeyzagumus/python-systemd-app:latest 
         ports:
         - containerPort: 8080
