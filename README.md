@@ -189,7 +189,7 @@ spec:
     spec:
       containers:
       - name: python-app
-        image: eminebeyzagumus/python-systemd-app:latest 
+        image: python-systemd-app:latest 
         ports:
         - containerPort: 8080
 ```
